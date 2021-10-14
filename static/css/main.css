@@ -45,6 +45,12 @@
   transform: translateY(-50%);
 }
 
+.my-center-xy {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
 /* just can't do this with tailwind :( */
 /* pretty ugly solution but it works */
 
