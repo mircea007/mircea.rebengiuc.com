@@ -1,0 +1,65 @@
+<!DOCTYPE hmtl>
+<html>
+  <head>
+    <!-- Meta -->
+    <title>My projects</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/img/favicon.ico" />
+
+    <!-- imports -->
+    <script src="/js/import.js"></script>
+  </head>
+  <body class="bg-gray-100 font-sans">
+    <div id="header"></div>
+
+    <div class="flex flex-col content-center"> <!-- big container -->
+      <h1 class="w-full text-center text-4xl">My Projects</h1>
+
+      <div class="flex flex-col md:flex-row shadow-md rounded-xl overflow-hidden text-lg mx-8 my-8">
+        <div class="flex-shrink-0">
+          <img class="h-48 w-full md:h-full md:w-48 lg:w-96 object-cover" src="/img/bacplus.jpe" />
+        </div>
+        <div class="bg-white p-5">
+          <h2 class="text-xl w-full text-center my-2 font-semibold">BAC+</h2>
+          <hr class="w-full mb-2">
+          <p>I made <a href="https://bacplus.ro/">this</a> website in colaboration with my cousin, Tiberiu. In romania news outlets are <i>obsessed</i> with the exam at the end of the last school year: Bacalaureat, commonly called <b>BAC</b>. My cousing thought that he should make a website with exam statistics and give it to the media. He told me about it and I asked if I could work on it too. He did the statistics and I focused more on the web design. When the 2021 edition of the exam came along it ended up being a success. Over 12000 people saw the website and we were featured on 30 different media outlets.</p>
+        </div>
+      </div>
+
+      <hr class="mx-8 my-8">
+
+      <div class="flex flex-col md:flex-row-reverse shadow-md rounded-xl overflow-hidden text-lg mx-8 my-8">
+        <div class="flex-shrink-0">
+          <img class="h-48 w-full md:h-full md:w-48 lg:w-96 object-cover" src="/img/airborne.png" />
+        </div>
+        <div class="bg-white p-5">
+          <h2 class="text-xl w-full text-center my-2 font-semibold">Airborne</h2>
+          <hr class="w-full mb-2">
+          <p><a href="http://airborne01.herokuapp.com/">Airborne</a> is a multiplayer .io game i made during the 2019 summer vacation. I made it using Node.js and HTML canvas. Each player is a plane, you can shoot over players and your score increases evry time you kill someone. The game features: a chat, smoke particle effects, lag and bugs. There is also a documentation page <a href="http://airborne01.herokuapp.com/doc.html">here</a>. I also put some screenshots below for you to enjoy</p>
+        </div>
+      </div>
+
+      <div class="grid gap-2 grid-cols-1 xl:grid-cols-2 text-lg mx-8 my-8">
+        <figure class="p-2 shadow-md rounded-xl">
+          <img class="rounded-lg" src="/img/airborne1.png" />
+          <figcaption class="w-full text-center">main page</figcaption>
+        </figure>
+        <figure class="p-2 shadow-md rounded-xl">
+          <img class="rounded-lg" src="/img/airborne2.png" />
+          <figcaption class="w-full text-center">configurable settings</figcaption>
+        </figure>
+        <figure class="p-2 shadow-md rounded-xl">
+          <img class="rounded-lg" src="/img/airborne3.png" />
+          <figcaption class="w-full text-center">smoke particles</figcaption>
+        </figure>
+        <figure class="p-2 shadow-md rounded-xl">
+          <img class="rounded-lg" src="/img/airborne4.png" />
+          <figcaption class="w-full text-center">bullets</figcaption>
+        </figure>
+      </div>
+      
+      <div id="footer"></div>
+    </div>
+  </body>
+</html>

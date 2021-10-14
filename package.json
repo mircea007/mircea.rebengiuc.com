@@ -1,0 +1,19 @@
+{
+  "name": "mircea.rebengiuc.com",
+  "version": "1.0.0",
+  "description": "My personal website",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node index.js",
+    "build": "npx tailwindcss -i static/css/main.css -o static/css/tailwind.css"
+  },
+  "keywords": [],
+  "author": "Mircea Rebengiuc",
+  "license": "MIT",
+  "dependencies": {
+    "autoprefixer": "^10.3.7",
+    "express": "^4.17.1",
+    "postcss": "^8.3.9",
+    "tailwindcss": "^2.2.16"
+  }
+}
