@@ -10,7 +10,7 @@
     <!-- imports -->
     <script src="/js/import.js"></script>
   </head>
-  <body class="bg-gray-100 font-sans">
+  <body class="bg-gray-100">
     <div id="header"></div>
 
     <div class="flex flex-col content-center"> <!-- big container -->
@@ -31,7 +31,33 @@
 
       <div class="flex flex-col md:flex-row-reverse shadow-md rounded-xl overflow-hidden text-lg mx-8 my-8">
         <div class="flex-shrink-0">
-          <img class="h-48 w-full md:h-full md:w-48 lg:w-96 object-cover" src="/img/airborne.png" />
+          <img class="h-48 w-full md:h-full md:w-48 lg:w-96 object-cover" src="/img/lit.png" />
+        </div>
+        <div class="bg-white p-5">
+          <h2 class="text-xl w-full text-center my-2 font-semibold">Basic 3D graphics</h2>
+          <hr class="w-full mb-2">
+          <p><a href="http://cristian.francu.com">Cristian Francu</a> (my teacher) in 2021 held a few lessons about some very simple 3D graphics. We used SDL, a very simple graphics library and worked our way up. First we learned how to draw lines eficiently with Brezenham and then gradients, then we learned how to generate 3D shapes and render them. I ended up making <a href="/download/lit.zip" download>this program</a> in C. This program can render seven shapes (you can cicle through them using the arrow keys) and you cand rotate them to see what happens (Q, A, S, D, 0, 9). There is also an option to change the projection function by pressing P</p>
+        </div>
+      </div>
+
+      <hr class="mx-8 my-8">
+
+      <div class="flex flex-col md:flex-row shadow-md rounded-xl overflow-hidden text-lg mx-8 my-8">
+        <div class="flex-shrink-0">
+          <img class="h-48 w-full md:h-full md:w-48 lg:w-96 object-cover" src="/img/tailwind.png" />
+        </div>
+        <div class="bg-white p-5">
+          <h2 class="text-xl w-full text-center my-2 font-semibold">This website :)</h2>
+          <hr class="w-full mb-2">
+          <p>I have this website since 2021 when I bought the domain <a href="http://rebengiuc.com">rebengiuc.com</a>. My section, <a href="http://mircea.rebengiuc.com">mircea.rebengiuc.com</a> is where I keep my website. In september I started remodeling the site because I didn't update the website in a while and I thought that now I could do better. My cousin, Tiberiu, told me about <a href="https://tailwindcss.com/">tailwind css</a> and it is amazing. Making something look good is't a chore anymore. It also has responsive classes so you will never need to make a media query ever again. Also btw did I mention that they have native dark mode support? Tailwind is awsome and you should check it out.</p>
+        </div>
+      </div>
+      
+      <hr class="mx-8 my-8">
+
+      <div class="flex flex-col md:flex-row-reverse shadow-md rounded-xl overflow-hidden text-lg mx-8 my-8">
+        <div class="flex-shrink-0">
+          <img class="h-48 w-full  md:h-full md:w-48 lg:w-96 object-cover" src="/img/airborne.png" />
         </div>
         <div class="bg-white p-5">
           <h2 class="text-xl w-full text-center my-2 font-semibold">Airborne</h2>
@@ -58,7 +84,7 @@
           <figcaption class="w-full text-center">bullets</figcaption>
         </figure>
       </div>
-      
+            
       <div id="footer"></div>
     </div>
   </body>
