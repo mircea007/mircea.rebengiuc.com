@@ -26,6 +26,10 @@
   .bronze {
     @apply text-yellow-600 font-black;
   }
+  
+  .current {
+    @apply -my-2 p-2 bg-blue-500 text-white rounded-b-lg !important;
+  }
 }
 
 /* tailwind doesnt have text shadow so i have to do it vanilla */

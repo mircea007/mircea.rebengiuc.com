@@ -8,5 +8,9 @@
     </div>
     <span class="float-right hidden sm:inline">Mircea Rebengiuc</span>
   </div>
+  <script>
+    var url = new URL(window.location.href);
+    $('div.navbar div.flex a[href="'+url.pathname+'"]').each(function(){ $(this).addClass('current'); });
+  </script>
 </div>
 <div class="w-0 mt-24 md:mt-28"></div> <!-- to control margin for header -->
