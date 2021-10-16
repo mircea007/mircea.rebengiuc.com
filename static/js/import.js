@@ -29,17 +29,16 @@ var root_prefix = "/";
 // external
 
 addJS("https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"); // google jquery CDN
+addCSS(root_prefix + "css/tailwind.css");                                  // compiled tailwind stylesheet
 
 // internal
 
-window.my_custom_templates_loaded = false;
-
 wait_for(function(){ return window.jQuery }, function(){
-  addJS(root_prefix + "js/load-head.js");   // loads header and footers
-  addCSS(root_prefix + "css/tailwind.css"); // compiled tailwind stylesheet
-});
+  addJS(root_prefix + "js/load-templates.js");     // loads templates
 
-// no more loading effect
-//wait_for(function(){ return window.my_custom_templates_loaded }, function(){
-//  addJS(root_prefix + "js/load-effect.js"); // custom section loading animation script
-//});
+  wait_for(function(){ return $('.navbar').length > 0 }, function(){
+    var url = new URL(window.location.href);
+    $('div.navbar div.flex a[href="'+url.pathname+'"]').each(function(){ $(this).addClass('current'); });
+    console.log('highlighted current');
+  });
+});
