@@ -1,3 +1,6 @@
+// if i ever need extra colors
+const colors = require('tailwindcss/colors');
+
 module.exports = {
   mode: 'jit',
   purge: [
