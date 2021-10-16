@@ -9,17 +9,6 @@
       </div>
       <span class="float-right hidden sm:inline">Mircea Rebengiuc</span>
     </div>
-    <script>
-      function show_current(){
-        var url = new URL(window.location.href);
-        $('div.navbar div.flex a[href="'+url.pathname+'"]').each(function(){ $(this).addClass('current'); });
-      }
-
-      if( document.readyState == "complete" )
-        show_current();
-      else
-        window.onload = show_current;
-    </script>
   </div>
   <div class="w-0 mt-24 md:mt-28"></div> <!-- to control margin for header -->
 </template>
