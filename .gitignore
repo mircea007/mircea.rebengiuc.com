@@ -1,2 +1,6 @@
+# archive for realease section and deployment
+*.zip
+
+# the usual
 node_modules
 static/css/tailwind.css

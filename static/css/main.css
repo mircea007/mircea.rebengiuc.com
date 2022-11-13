@@ -14,6 +14,10 @@
     @apply text-xl;
   }
 
+  hr {
+    @apply text-gray-200;
+  }
+
   a {
     @apply text-blue-500 hover:underline;
   }
@@ -38,12 +42,6 @@
   }
 }
 
-/* tailwind doesnt have text shadow so i have to do it vanilla */
-
-/*.gold, .silver, .bronze {
-  @apply ;
-}*/
-
 /* seriosly??? you cant even center a div in tailwind */
 .my-center-x {
   left: 50%;
@@ -61,16 +59,4 @@
   transform: translate(-50%, -50%);
 }
 
-/* just can't do this with tailwind :( */
-/* pretty ugly solution but it works */
-
-.header:hover .navbar {
-  max-height: 10rem; /* will never be this big */
-}
-
-.header:not(:hover) .navbar {
-  max-height: 0;
-  padding-top: 0;
-  padding-bottom: 0;
-}
 
