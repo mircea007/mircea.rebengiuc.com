@@ -1,7 +1,7 @@
 # mircea.rebengiuc.com
 
 This repo is for my website: [mircea.rebengiuc.com](http://mircea.rebengiuc.com).
-I built it with the help of [tailwind css](https://tailwindcss.com).
+The site is fully static, node is used here mostly for compiling tailwind.
 
 ## Commands
 
