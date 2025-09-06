@@ -33,8 +33,6 @@ wait_for(function(){ return $('template').length > 0 }, function(){ // wait for 
       // the content of the element should not be a atribute
       // because this way we can make nested templates 
       current_content = current_content.replace('__content__', this.innerHTML);
-      
-      console.log(remaining_attr);
 
       // any atributes that are not placeholders will be inherited
       current_content = current_content.replace('__attrib__', remaining_attr);

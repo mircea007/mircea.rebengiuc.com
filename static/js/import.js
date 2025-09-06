@@ -45,5 +45,8 @@ wait_for(_ => window.jQuery, _ => {
     const url = new URL(window.location.href);
     $(`div.navbar div.flex a[href="${url.pathname}"]`).each(function(){ $(this).addClass('current'); });
     console.log('highlighted current');
+
+    document.body.style = '';
+    console.log('displayed page');
   });
 });
