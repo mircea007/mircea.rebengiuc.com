@@ -35,10 +35,15 @@
   }
   
   .current {
-    @apply -my-2 p-2 bg-gradient-to-b from-blue-500 to-indigo-800 text-white rounded-b-lg !important;
+    @apply -my-2 p-2 bg-gradient-to-t from-indigo-800 via-blue-500 to-white text-white rounded-b-lg !important;
   }
+
   .my-gradient-cols {
     @apply from-blue-500 to-indigo-800;
+  }
+
+  .favicon {
+    @apply h-4 w-4;
   }
 }
 
@@ -59,4 +64,6 @@
   transform: translate(-50%, -50%);
 }
 
-
+.gold-medal::before { content: "🥇"; }
+.silver-medal::before { content: "🥈"; }
+.bronze-medal::before { content: "🥉"; }

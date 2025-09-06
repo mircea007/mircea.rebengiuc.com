@@ -1,4 +1,4 @@
-<!DOCTYPE hmtl>
+<!DOCTYPE html>
 <html>
   <head>
     <!-- Meta -->
@@ -12,115 +12,41 @@
     <div temp-import="header"></div>
 
     <div class="flex flex-col content-center"> <!-- big container -->
-      <!-- about me, no need for a template -->
-      <div class="flex flex-col md:flex-row relative my-center-x w-11/12 md:w-4/5 lg:w-1/2 text-lg my-8">
-        <div class="absolute bg-gradient-to-br from-blue-500 to-indigo-800 transform origin-center rotate-6 sm:rotate-3 xl:rotate-2 scale-95 sm:scale-105 md:scale-110 w-full h-full z-0 rounded-xl shadow-md"></div>
-        <div class="flex-shrink-0 h-48 md:absolute md:inset-y-0 md:h-full md:w-48 content-center items-center bg-transparent">
-          <img class="z-10 h-40 w-40 relative my-center-xy object-contain rounded-full object-center" src="/img/dude.png" />
+      <!-- <div temp-import="orig-about-me"> </div> -->
+
+      <div class="grid grid-cols-1 md:grid-cols-5 mx-8 mb-8 gap-4">
+        <div class="md:col-span-3">
+          <div class="flex flex-col md:flex-row relative my-center-xy w-11/12 md:w-4/5 lg:w-2/3 text-lg mb-8">
+            <div class="absolute bg-gradient-to-br from-blue-500 to-indigo-800 transform origin-center rotate-6 sm:rotate-3 xl:rotate-2 scale-95 sm:scale-105 md:scale-110 w-full h-full z-0 rounded-xl shadow-md"></div>
+            <div class="flex-shrink-0 h-48 md:absolute md:inset-y-0 md:h-full md:w-48 content-center flex md:flex-col items-center bg-transparent">
+              <img class="z-10 h-40 w-40 relative my-center-xy object-contain rounded-full object-center" src="/img/dude.png" />
+            </div>
+            <div class="flex-grow p-5 md:ml-48 bg-white shadow-md rounded-xl overflow-hidden z-10">
+              <h2 class="text-xl w-full text-center my-2">About Me</h2>
+              <hr class="w-full mb-2">
+              <p> My name is <span class="text-indigo-500 font-semibold">Mircea Rebengiuc</span>. I like to find things to think about.  </p>
+              <hr class="w-full mb-2 mt-2">
+              <div class="flex flex-col xl:flex-row justify-between">
+                <div temp-import='icon-link' temp-href="https://github.com/mircea007" temp-img="/img/github.ico">github</div>
+                <div temp-import='icon-link' temp-href="https://codeforces.com/profile/mircea_007" temp-img="/img/codeforces.png">codeforces</div>
+                <div temp-import='icon-link' temp-href="/download/Resume_Mircea_Rebengiuc.pdf" temp-img="/img/resume.png">resume</div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="p-5 md:ml-48 bg-white shadow-md rounded-xl overflow-hidden z-10">
-          <h2 class="text-xl w-full text-center my-2">About Me</h2>
-          <hr class="w-full mb-2">
-          <p>My name is <span class="text-indigo-500 font-semibold">Mircea Rebengiuc</span>. I study programming and I also take part in competitive programming contests (see awards). My hobbies range from ping pong, cubing and spending hours on a website just because the old version looks dumb now. </p>
-        </div>
-      </div>
+
+        <div class="md:col-span-2 grid grid-cols-2 place-self-stretch gap-4">
+          <div class="col-span-2">
+            <h1 class="text-center text-4xl">Awards</h1>
+            <hr class="mx-8 mt-8">
+          </div>
       
-      <h1 class="text-center text-4xl">My skills</h1>
-      <hr class="mx-8 mt-8">
-
-      <div temp-import="row">
-        <div temp-import="non-resp-card" temp-img-url="/img/c.jpg">
-          <h2 class="text-xl w-full text-center my-2 font-semibold">C/C++</h2>
-          <hr class="w-full mb-2">
-          <p>I consider learning C to be very important because it was used for UNIX (the first operating system and 'ancestor' of one of today's best operating sistems, GNU/LINUX). It's combination of simplicity and power makes it ideal for both beginners and andvanced developers. I learned C from <a href="http://cristian.francu.com/">Cristian Francu</a>, an amazing teacher without which i coudn't have been able to do this much.</p>
-        </div>
-        <div temp-import="non-resp-card" temp-img-url="/img/something.jpe">
-          <h2 class="text-xl w-full text-center my-2 font-semibold">Python</h2>
-          <hr class="w-full mb-2">
-          <p>One day I decided to learn Python by myself. It was very easy. Though it is lacking in some areas (especially speed) it is great in aplications such as data science, AI and statistics. Also, because of it's general lack of overhead (speaking in terms of implementation speed), it is great for quick scripts where languages like bash and awk just don't do the job.</p>
-        </div>
-        <div temp-import="non-resp-card" temp-img-url="/img/css.jpeg">
-          <h2 class="text-xl w-full text-center my-2 font-semibold">Web</h2>
-          <hr class="w-full mb-2">
-          <p>I started learning the basic web languadges (HTML, CSS and JS) when I decided I wanted a personal website. I recently also started learning more fancy stuff like React, Next.js and Tailwindcss for bigger projects. These frameworks drasticaly enhance the developer experience
-          and I don't regret spending my time learning them.
-        </div>
-      </div>
-
-      <div temp-import="row">
-        <div temp-import="non-resp-card" temp-img-url="/img/php.png">
-          <h2 class="text-xl w-full text-center my-2 font-semibold">PHP</h2>
-          <hr class="w-full mb-2">
-          <p>Let's be clear: the only advantage of PHP over Node is that you can find easy free hosting. This languadge is a mess (If you don't believe me just wait until you find out that somehow "0" == NULL). It's syntax is pure garbage and it's slow. Now I wonder why I learned this useless time-consuming piece of <span class="text-black bg-black">shit</span>.</p>
-        </div>
-        <div temp-import="non-resp-card" temp-img-url="/img/node.webp">
-          <h2 class="text-xl w-full text-center my-2 font-semibold">Node.js</h2>
-          <hr class="w-full mb-2">
-          <p>Let's be clear: the only advantage of PHP over Node is that Heroku, the only free Node hosting service I could find doesn't believe in files and is a pain to start up. Like JS (beacause that's what it is), Node.js has a normal syntax, built-in asyncronous programming, and it's fast(-ish, but PHP is still slower). If you want to do anything on the web use Node.js <span class="text-gray-300">(#not sponsored)</span></p>
-        </div>
-        <div temp-import="non-resp-card" temp-img-url="/img/sql.jpeg">
-          <h2 class="text-xl w-full text-center my-2 font-semibold">SQL</h2>
-          <hr class="w-full mb-2">
-          <p>Though it is widely used to this day SQL, like PHP, has earned a reputation of being something in a bank that they didn't bother to change since 1970 (because if it ain't broke, don't fix it). The de-facto implementation of SQL is, of course, <span class="line-through">MySQL</span> MariaDB but new ones such as PostgreSQL and MongoDB are quickly gaining traction. Unlike PHP you don't have that many alternatives so yeah, better learn it if you want that job.</p>
-        </div>
-      </div>
-      
-      <h1 class="text-center text-4xl">Awards</h1>
-      <hr class="mx-8 mt-8">
-
-      <div temp-import="row">
-        <div temp-import="plain-card">
-          <h2 class="text-xl w-full text-center my-2 font-semibold">2022</h2>
-          <hr class="w-full mb-2">
-          <ul class="list-disc list-inside">
-            <li><span class="silver">Silver</span> medal at RMI (Romanian Master of Informatics)</span>
-            <li><span class="silver">Silver</span> medal at EJOI (European Junior Olympiad in Informatics)</span>
-            <li><span class="silver">Silver</span> medal at JBOI (Junior Balkan Olympiad in Informatics)</span>
-            <li><span class="gold">Gold</span> medals at all three categories of <a href="https://cup.mg.edu.rs">MGSC</a> (again 2<sup>nd</sup> place in Romania at the Physics category)</li>
-            <li><span class="gold">Gold</span> medal at the National Olimpiad of Informatics (<span class="gold">1<sup>st</sup></span> place)</li>
-            <li>Got into the national team for international competitions for Informatics (again)</li>
-            <li><span class="gold">Gold</span> medal at the National Olimpiad of Mathematics (<span class="gold">4<sup>th</sup></span> place)</li>
-            <li>Got into the national team for international competitions for Mathematics (idk how)</li>
-            <li><span class="silver">Silver</span> medal at the National Olimpiad of Physics</li>
-          </ul>
-        </div>
-      </div>
-
-      <div temp-import="row">
-        <div temp-import="plain-card">
-          <h2 class="text-xl w-full text-center my-2 font-semibold">2021</h2>
-          <hr class="w-full mb-2">
-          <ul class="list-disc list-inside">
-            <li><span class="gold">1<sup>st</sup></span> place at Empowersoft (again, but this time they gave me a drone)</li>
-            <li><span class="gold">Gold</span> medal at the National Olimpiad of Informatics (<span class="gold">8<sup>th</sup></span> place)</li>
-            <li>Got into the national team for international competitions</li>
-            <li><span class="silver">Silver</span> medals at all three categories of <a href="https://cup.mg.edu.rs">MGSC</a> (2<sup>nd</sup> place in Romania at the Physics category)</li>
-          </ul>
-        </div>
-        <div temp-import="plain-card">
-          <h2 class="text-xl w-full text-center my-2 font-semibold">2020</h2>
-          <hr class="w-full mb-2">
-          <ul class="list-disc list-inside">
-            <li><span class="gold">1<sup>st</sup></span> place at Empowersoft (an online programming competition, similar to the olympiad)</li>
-            <li><span class="gold">1<sup>st</sup></span> place at <a href="http://cristian.francu.com/">Cristian Francu</a>'s flood-wars competition</li>
-          </ul>
-        </div>
-      </div>
-
-      <div temp-import="row">
-        <div temp-import="plain-card">
-          <h2 class="text-xl w-full text-center my-2 font-semibold">2019</h2>
-          <hr class="w-full mb-2">
-          <ul class="list-disc list-inside">
-            <li><span class="bronze">Bronze</span> medal at the National Olympiad of Informatics (<span class="bronze">11<sup>th</sup></span> place)</li>
-          </ul>
-        </div>
-        <div temp-import="plain-card">
-          <h2 class="text-xl w-full text-center my-2 font-semibold">2018</h2>
-          <hr class="w-full mb-2">
-          <ul class="list-disc list-inside">
-            <li><span class="gold">1<sup>st</sup></span> place at the admision exam for CNITV.</li>
-          </ul>
+          <div temp-import="olympiad" temp-name="IOI 2025" temp-medal="gold" temp-location="Sucre, Bolivia"> </div>
+          <div temp-import="olympiad" temp-name="CEOI 2025" temp-medal="gold" temp-location="Cluj, Romania"> </div>
+          <div temp-import="olympiad" temp-name="IOAI 2025" temp-medal="bronze" temp-location="Beijing, China"> </div>
+          <div temp-import="olympiad" temp-name="IOAI 2024" temp-medal="bronze" temp-location="Burgas, Bulgaria"> </div>
+          <div temp-import="olympiad" temp-name="APhO 2025" temp-medal="bronze" temp-location="Dhahran, Saudi Arabia"> </div>
+          <div temp-import="olympiad" temp-name="RMM 2024" temp-medal="bronze" temp-location="Bucharest, Romania"> </div>
         </div>
       </div>
 
