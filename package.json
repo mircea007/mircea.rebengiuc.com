@@ -1,12 +1,20 @@
 {
   "name": "mircea.rebengiuc.com",
-  "version": "1.3.0",
+  "version": "2.0.0",
   "description": "My personal website",
   "main": "index.js",
+
   "scripts": {
     "dev": "node index.js",
-    "build": "npx tailwindcss -i static/css/main.css -m -o static/css/tailwind.css"
+    "build": "npx tailwindcss -i static/css/main.css -m -o static/css/tailwind.css",
+
+    "deploy:0": "npm run build",
+    "deploy:1": "zip -r upload.zip ./static/",
+    "deploy:2": "bash -c 'source ./.env && scp upload.zip $REMOTE_USER@$REMOTE_HOST:~/public_html/mircea/upload.zip'",
+    "deploy:3": "bash -c 'source ./.env && ssh $REMOTE_USER@$REMOTE_HOST \"cd ~/public_html/mircea/ && unzip -o upload.zip && cp -r ./static/* ./\"'",
+    "deploy": "npm-run-all deploy:*"
   },
+
   "keywords": [],
   "author": "Mircea Rebengiuc",
   "license": "MIT",

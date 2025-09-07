@@ -4,3 +4,7 @@
 # the usual
 node_modules
 static/css/tailwind.css
+
+# deployment secrets
+.env
+ssh_key
