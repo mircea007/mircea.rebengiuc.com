@@ -38,11 +38,10 @@ void dump( const Node *node, int lvl = 2 ) {
 
   for( const auto &[key, val]: node->attrib )
     printf( " \"%s\" = \"%s\"", key.c_str(), val.c_str() );
+  printf( "\n" );
 
   for( const Node* kid : node->kids )
     dump( kid, lvl + 4 );
-
-  printf( "\n" );
 }
 
 struct Token {
@@ -232,7 +231,67 @@ std::string pre_process( const std::string& data ) {
 }
 
 Node* make_tree( const vec<Token>& tokens ) {
-  return nullptr;
+  int idx = 0;
+
+  auto parse_node = [&]( auto&& self ) -> Node* {
+    assert( idx < (int)tokens.size() && tokens[idx].type == Token::Type::TAG_BEGIN ); idx++;
+    assert( idx < (int)tokens.size() && tokens[idx].type == Token::Type::ATTRIB ); idx++;
+
+    Node *root = new Node();
+    root->isleaf = false;
+    root->name = tokens[idx - 1].value;
+
+    while( idx < (int)tokens.size() && !(tokens[idx].type == Token::Type::TAG_END || tokens[idx].type == Token::Type::TAG_POP_SELF) ){
+      assert( tokens[idx].type == Token::Type::ATTRIB );
+      
+      if( idx + 1 < (int)tokens.size() && tokens[idx + 1].type != Token::Type::EQUAL ){
+        root->attrib.emplace_back( tokens[idx].value, "" );
+        idx++;
+        continue;
+      }
+
+      assert( idx + 2 < (int)tokens.size() && tokens[idx + 2].type == Token::Type::STRING_LITERAL );
+      root->attrib.emplace_back( tokens[idx].value, tokens[idx + 2].value );
+      idx += 3;
+      continue;
+    }
+
+    assert( idx < (int)tokens.size() );
+    idx++;
+
+    if( tokens[idx - 1].type == Token::Type::TAG_POP_SELF )
+      return root;
+
+    while( idx < (int)tokens.size() && tokens[idx].type != Token::Type::TAG_POP ){
+      if( tokens[idx].type == Token::Type::TEXT ){
+        root->kids.push_back( new Node(tokens[idx].value) );
+        idx++;
+        continue;
+      }
+
+      if( tokens[idx].type == Token::Type::TAG_BEGIN ){
+        root->kids.push_back( self( self ) );
+        continue;
+      }
+
+      assert( false );
+    }
+
+    assert( idx < (int)tokens.size() ); idx++;
+    assert( idx < (int)tokens.size() && tokens[idx].type == Token::Type::ATTRIB );
+    if( tokens[idx].value != root->name ){
+      fprintf( stderr, "trying to close \"%s\" with \"%s\"\n", tokens[idx].value.c_str(), root->name.c_str() );
+      assert( false );
+    }
+
+    idx++;
+    assert( idx < (int)tokens.size() && tokens[idx].type == Token::Type::TAG_END ); idx++;
+    return root;
+  };
+  
+  Node* root = parse_node( parse_node );
+  // assert( idx == (int)tokens.size() );
+  return root;
 }
 
 Node* parse_html( const std::string& data ) {
