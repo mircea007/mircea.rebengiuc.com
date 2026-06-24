@@ -1,10 +1,8 @@
 # archive for realease section and deployment
 *.zip
-
-# the usual
-node_modules
-static/css/tailwind.css
+compiler/main
 
 # deployment secrets
 .env
 ssh_key
+

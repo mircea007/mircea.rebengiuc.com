@@ -2,5 +2,3 @@
 
 source .env
 
-npx tailwindcss -i static/css/main.css -m -o static/css/tailwind.css
-wrangler pages deploy static --project-name mircea007 --branch main

@@ -1,0 +1,298 @@
+// really funny html parser
+// don't judge heavy use of std::string
+// my lazyness is beyond understanding
+
+#include <cstdio>
+#include <cassert>
+#include <cstdlib>
+#include <cstring>
+#include <cctype>
+
+#include <algorithm>
+#include <vector>
+
+#include <string>
+
+template<class T> using vec = std::vector<T>;
+
+// bad order, fix later
+struct Node {
+  bool isleaf;
+  std::string name; // text for leaves and tag name for nodes
+  vec<Node*> kids;
+  vec<std::pair<std::string, std::string>> attrib;
+
+  Node(): isleaf(true) {}
+  Node( const std::string& text ): isleaf(true), name(text) {}
+  ~Node() {
+    for( const Node* kid : kids )
+      delete kid;
+  }
+};
+
+void dump( const Node *node, int lvl = 2 ) {
+  if( !node ) return;
+  for( int t = lvl; t--; ) fputc( ' ', stdout );
+
+  printf( "(%d \"%s\")", int(node->isleaf), node->name.c_str() );
+
+  for( const auto &[key, val]: node->attrib )
+    printf( " \"%s\" = \"%s\"", key.c_str(), val.c_str() );
+
+  for( const Node* kid : node->kids )
+    dump( kid, lvl + 4 );
+
+  printf( "\n" );
+}
+
+struct Token {
+  enum class Type {
+    TAG_BEGIN, TAG_END, TAG_POP, TAG_POP_SELF,
+    TEXT, ATTRIB, EQUAL, STRING_LITERAL
+  } type;
+  std::string value;
+
+  std::string print() const {
+    if( type == Type::TEXT ) return value;
+    if( type == Type::ATTRIB ) return value;
+    if( type == Type::STRING_LITERAL ) return "\"" + value + "\"";
+    if( type == Type::TAG_BEGIN ) return "<";
+    if( type == Type::TAG_END ) return ">";
+    if( type == Type::TAG_POP ) return "</";
+    if( type == Type::TAG_POP_SELF ) return "/>";
+    if( type == Type::EQUAL ) return "=";
+    assert( false );
+  }
+};
+
+template<class IT>
+vec<Token> tokenize_raw( IT begin, IT end ) {
+  vec<Token> ret;
+  IT it = begin;
+  auto getc = [&]() -> char { assert( it != end ); return *(it++); };
+
+  bool inside_tag = false;
+  bool inside_string_literal = false;
+  bool begin_new_token = true;
+  while( it != end ){
+    char ch = getc();
+
+    if( !inside_tag ){
+      assert( !inside_string_literal );
+
+      if( ch == '<' ){
+        ret.push_back( Token{ Token::Type::TAG_BEGIN, "" } );
+        begin_new_token = true;
+        inside_tag = true;
+        continue;
+      }
+
+      if( !begin_new_token ){
+        assert( !ret.empty() && ret.back().type == Token::Type::TEXT );
+        ret.back().value.push_back( ch );
+        continue;
+      }
+
+      if( !isspace( ch ) ){
+        ret.push_back( Token{ Token::Type::TEXT, std::string(1, ch) } );
+        begin_new_token = false;
+        continue;
+      }
+
+      continue;
+    }
+
+    if( inside_string_literal ){
+      assert( !ret.empty() && ret.back().type == Token::Type::STRING_LITERAL );
+
+      if( ch == '"' ){
+        inside_string_literal = false;
+        begin_new_token = true;
+        continue;
+      }
+
+      ret.back().value.push_back( ch );
+      if( ch == '\\' )
+        ret.back().value.push_back( getc() );
+      continue;
+    }
+
+    // inside tag and not string literal
+
+    if( ch == '"' ){
+      inside_string_literal = true;
+      begin_new_token = false;
+      ret.push_back( Token{ Token::Type::STRING_LITERAL, "" } );
+      continue;
+    }
+
+    if( isspace( ch ) ){
+      begin_new_token = true;
+      continue;
+    }
+
+    if( ch == '>' ){
+      ret.push_back( Token{ Token::Type::TAG_END, "" } );
+      inside_tag = false;
+      begin_new_token = true;
+      continue;
+    }
+
+    if( begin_new_token ){
+      ret.push_back( Token{ Token::Type::ATTRIB, "" } );
+      begin_new_token = false;
+    }
+
+    assert( !ret.empty() && ret.back().type == Token::Type::ATTRIB );
+    ret.back().value.push_back( ch );
+    continue;
+  }
+
+  return ret;
+}
+
+// make attrib A= -> attrib A, equal;
+// make attrib =  -> equal;
+// make tag_begin, attrib /* -> tag_pop;
+// make attrib /, tag_end -> tag_pop_self;
+vec<Token> post_process( const vec<Token>& tokens ) {
+  vec<Token> ret;
+
+  for( const Token& T : tokens ){
+    if( T.type == Token::Type::ATTRIB ){
+      assert( !T.value.empty() );
+
+      if( T.value == "=" ){
+        ret.push_back( Token{ Token::Type::EQUAL, "" } );
+        continue;
+      }
+
+      if( T.value.back() == '=' ){
+        ret.push_back( Token{ Token::Type::ATTRIB, std::string(T.value.begin(), T.value.end() - 1) } );
+        ret.push_back( Token{ Token::Type::EQUAL, "" } );
+        continue;
+      }
+
+      if( T.value.front() == '/' && (int)T.value.size() >= 2 && !ret.empty() && ret.back().type == Token::Type::TAG_BEGIN ){
+        ret.pop_back();
+        ret.push_back( Token{ Token::Type::TAG_POP, "" } );
+        ret.push_back( Token{ Token::Type::ATTRIB, std::string(T.value.begin() + 1, T.value.end()) } );
+        continue;
+      }
+
+      ret.push_back( T );
+      continue;
+    }
+
+    if( T.type == Token::Type::TAG_END ){
+      if( ret.empty() || ret.back().type != Token::Type::ATTRIB || ret.back().value != "/" ){
+        ret.push_back( T );
+        continue;
+      }
+
+      ret.pop_back();
+      ret.push_back( Token{ Token::Type::TAG_POP_SELF, "" } );
+      continue;
+    }
+
+    ret.push_back( T );
+  }
+  
+  return ret;
+}
+
+std::string pre_process( const std::string& data ) {
+  vec<bool> in_comment(data.size(), false); {
+    bool state = false;
+    for( int i = 0; i < (int)data.size(); i++ ){
+      if( i - 3 >= 0 && std::string( data.begin() + i - 3, data.begin() + i ) == "-->" )
+        state = false;
+      if( i + 4 <= (int)data.size() && std::string( data.begin() + i, data.begin() + i + 4 ) == "<!--" )
+        state = true;
+      
+      in_comment[i] = state;
+    }
+  }
+
+  std::string ret; {
+    bool prev = false;
+    for( int i = 0; i < (int)data.size(); i++ ){
+      if( in_comment[i] ){
+        if( !prev )
+          ret.push_back( ' ' );
+        prev = true;
+      }else{
+        ret.push_back( data[i] );
+        prev = false;
+      }
+    }
+  }
+
+  return ret;
+}
+
+Node* make_tree( const vec<Token>& tokens ) {
+  return nullptr;
+}
+
+Node* parse_html( const std::string& data ) {
+  std::string sanitized = pre_process( data );
+  vec<Token> tokens_raw = tokenize_raw( sanitized.begin(), sanitized.end() );
+  vec<Token> tokens = post_process( tokens_raw );
+
+  vec<Token> pref = {
+    Token{ Token::Type::TAG_BEGIN, "" },
+    Token{ Token::Type::ATTRIB, "all" },
+    Token{ Token::Type::TAG_END, "" }
+  }, suff = {
+    Token{ Token::Type::TAG_POP, "" },
+    Token{ Token::Type::ATTRIB, "all" },
+    Token{ Token::Type::TAG_END, "" }
+  };
+
+  tokens.insert( tokens.begin(), pref.begin(), pref.end() );
+  tokens.insert( tokens.end(), suff.begin(), suff.end() );
+
+  for( const Token& token : tokens )
+    fprintf( stderr, "%s|", token.print().c_str() );
+  fprintf( stderr, "\n\n\n" );
+
+  return make_tree( tokens );
+}
+
+// tot felul de chestii
+std::string read_file( const char *fname ) {
+  FILE *fin = fopen( fname, "rb" );
+  if( !fin ) return "";
+
+  fseek( fin, 0, SEEK_END );
+  size_t lenght = ftell( fin );
+  fseek( fin, 0, SEEK_SET );
+
+  char* ret = (char*)malloc( lenght );
+  assert( ret );
+
+  fread( ret, 1, lenght, fin );
+  fclose( fin );
+
+  std::string _ret(ret, ret + lenght);
+  free( ret );
+  return _ret;
+}
+
+int main( int argc, char *argv[] ) {
+  assert( argc == 1 + 1 );
+  
+  Node* root = parse_html( read_file( argv[1] ) );
+
+  dump( root );
+  delete root;
+
+  return 0;
+}
+
+
+
+
+
+
