@@ -1,6 +1,6 @@
 # archive for realease section and deployment
 *.zip
-compiler/main
+compiler/compiler
 
 # deployment secrets
 .env
