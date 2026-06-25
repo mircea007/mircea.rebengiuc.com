@@ -17,7 +17,7 @@
 
 template<class T> using vec = std::vector<T>;
 
-void dump( const Node *node, int lvl ) {
+void dump( Node *node, int lvl ) {
   if( !node ) return;
   for( int t = lvl; t--; ) fputc( ' ', stdout );
 
@@ -27,8 +27,41 @@ void dump( const Node *node, int lvl ) {
     printf( " \"%s\" = \"%s\"", key.c_str(), val.c_str() );
   printf( "\n" );
 
-  for( const Node* kid : node->kids )
+  for( Node* kid : node->kids )
     dump( kid, lvl + 4 );
+}
+
+std::string make_string( Node* root ) {
+  if( !root ) return "";
+  if( root->isleaf ) return root->name;
+
+  std::string ret(1, '<');
+  ret += root->name;
+
+  for( const auto &[key, val]: root->attrib ){
+    ret += " ";
+    ret += key;
+    ret += "=\"";
+    ret += val;
+    ret += "\"";
+  }
+
+  ret += ">";
+  for( Node* kid : root->kids )
+    ret += make_string( kid );
+
+  ret += "</";
+  ret += root->name;
+  ret += ">";
+  return ret;
+}
+
+Node* copy_node( Node* root ) {
+  if( !root ) return nullptr;
+  Node* ret = new Node(*root);
+  for( auto& kid : ret->kids )
+    kid = copy_node( kid );
+  return ret;
 }
 
 struct Token {

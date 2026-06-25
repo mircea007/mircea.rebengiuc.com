@@ -30,7 +30,8 @@ void dump( const Node *node, int lvl = 2 );
 
 Node* parse_html( const std::string& data );
 
-
+std::string make_string( Node* root );
+Node* copy_node( Node* u );
 
 
 
