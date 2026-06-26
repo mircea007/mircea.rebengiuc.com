@@ -1,15 +1,13 @@
-<!DOCTYPE html>
 <html>
   <head>
     <!-- Meta -->
-    <meta charset="UTF-8" />
     <title>Mircea Rebengiuc!</title>
     <div temp-import="meta"></div>
 
     <!-- imports -->
     <script src="/js/import.js"></script>
   </head>
-  <body style="display: none;" class="bg-gray-100">
+  <body class="bg-gray-100">
     <div temp-import="header"></div>
 
     <div class="flex flex-col content-center"> <!-- big container -->
@@ -20,17 +18,17 @@
           <div class="flex flex-col md:flex-row relative my-center-xy w-11/12 md:w-4/5 lg:w-2/3 text-lg mb-8">
             <div class="absolute bg-gradient-to-br from-blue-500 to-indigo-800 transform origin-center rotate-6 sm:rotate-3 xl:rotate-2 scale-95 sm:scale-105 md:scale-110 w-full h-full z-0 rounded-xl shadow-md"></div>
             <div class="flex-shrink-0 h-48 md:absolute md:inset-y-0 md:h-full md:w-48 content-center flex md:flex-col items-center bg-transparent">
-              <img class="z-10 h-40 w-40 relative my-center-xy object-contain rounded-full object-center" src="/img/dude.png" />
+              <img class="z-10 h-40 w-40 relative my-center-xy object-contain rounded-full object-center" src="/files/dude.png" />
             </div>
             <div class="flex-grow p-5 md:ml-48 bg-white shadow-md rounded-xl overflow-hidden z-10">
               <h2 class="text-xl w-full text-center my-2">About Me</h2>
-              <hr class="w-full mb-2">
+              <hr class="w-full mb-2" />
               <p> My name is <span class="text-indigo-500 font-semibold">Mircea Rebengiuc</span>, I like to find things to think about.  </p>
-              <hr class="w-full mb-2 mt-2">
+              <hr class="w-full mb-2 mt-2" />
               <div class="flex flex-col xl:flex-row justify-between">
-                <div temp-import='icon-link' temp-href="https://github.com/mircea007" temp-img="/img/github.ico">github</div>
-                <div temp-import='icon-link' temp-href="https://codeforces.com/profile/mircea_007" temp-img="/img/codeforces.png">codeforces</div>
-                <div temp-import='icon-link' temp-href="/download/Resume_Mircea_Rebengiuc.pdf" temp-img="/img/resume.png">resume</div>
+                <div temp-import="icon-link" temp-href="https://github.com/mircea007" temp-img="/files/github.ico">github</div>
+                <div temp-import="icon-link" temp-href="https://codeforces.com/profile/mircea_007" temp-img="/files/codeforces.png">codeforces</div>
+                <div temp-import="icon-link" temp-href="/download/Resume_Mircea_Rebengiuc.pdf" temp-img="/files/resume.png">resume</div>
               </div>
             </div>
           </div>
@@ -39,7 +37,7 @@
         <div class="md:col-span-2 grid grid-cols-2 place-self-stretch gap-4">
           <div class="col-span-2">
             <h1 class="text-center text-4xl">Awards</h1>
-            <hr class="mx-8 mt-8">
+            <hr class="mx-8 mt-8" />
           </div>
       
           <div temp-import="olympiad" temp-name="IOI 2025" temp-medal="gold" temp-location="Sucre, Bolivia" temp-href="https://stats.ioinformatics.org/people/8749"> </div>

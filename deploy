@@ -1,4 +1,11 @@
 #!/bin/bash
 
-source .env
+#source .env
+
+mkdir -p build
+./compiler/compiler pages/index.html templates.html > build/index.html
+
+mkdir -p build/files
+cp -r files/ build/
+tailwindcss --input main.css --output build/files/styles.css
 

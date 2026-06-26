@@ -76,8 +76,12 @@ int main( int argc, char *argv[] ) {
       int idx = 0;
       while( idx < (int)root->attrib.size() && root->attrib[idx].first != "temp-import" )
         idx++;
-      if( idx < (int)root->attrib.size() && name2node.count( root->attrib[idx].second ) )
-        temp_node = name2node[root->attrib[idx].second];
+      if( idx < (int)root->attrib.size() ){
+        if( !name2node.count( root->attrib[idx].second ) )
+          fprintf( stderr, "[warn] template \"%s\" not found\n", root->attrib[idx].second.c_str() );
+        else
+          temp_node = name2node[root->attrib[idx].second];
+      }
     }
 
     std::string content;
