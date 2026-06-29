@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@reference "tailwindcss";
+
+/* wtf is this man */
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    @apply m-0 text-transparent bg-gradient-to-br from-blue-500 to-indigo-800 bg-clip-text font-semibold;
+  }
+  h1 {
+    @apply text-2xl;
+  }
+
+  h2 {
+    @apply text-xl;
+  }
+
+  hr {
+    @apply text-gray-200;
+  }
+
+  a {
+    @apply text-blue-500 hover:underline;
+  }
+
+  .gold {
+    @apply text-yellow-400 font-black;
+  }
+
+  .silver {
+    @apply text-gray-300 font-black;
+  }
+  
+  .bronze {
+    @apply text-yellow-600 font-black;
+  }
+  
+  .current {
+    @apply -my-2 p-2 bg-gradient-to-t from-indigo-800 via-blue-500 to-white text-white rounded-b-lg;
+  }
+
+  .my-gradient-cols {
+    @apply from-blue-500 to-indigo-800;
+  }
+
+  .favicon {
+    @apply h-4 w-4;
+  }
+
+.gold-medal::before { content: "1"; @apply: text-blue-300; }
+}
+
+/* seriosly??? you cant even center a div in tailwind */
+.my-center-x {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.my-center-y {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.my-center-xy {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.silver-medal::before { content: "2"; }
+.bronze-medal::before { content: "3"; }

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+g++ -Wall -O2 -o compiler main.cpp parser.cpp
+

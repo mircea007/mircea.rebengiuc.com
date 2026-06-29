@@ -1,6 +1,11 @@
 #!/bin/bash
 
-source .env
+#source .env
 
-npx tailwindcss -i static/css/main.css -m -o static/css/tailwind.css
-wrangler pages deploy static --project-name mircea007 --branch main
+mkdir -p build
+./compiler/compiler pages/index.html templates.html > build/index.html
+
+mkdir -p build/files
+cp -r files/ build/
+tailwindcss --input main.css --output build/files/styles.css
+
